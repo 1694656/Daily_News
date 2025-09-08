@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>光伏早报 - 云端管理后台</title>
+  <!-- 引入腾讯云开发SDK -->
+  <script src="https://imgcache.qq.com/qcloud/tcb/js-sdk/v2.13.0/cloudbase.min.js"></script>
+  <!-- 引入简单样式优化界面 -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Microsoft YaHei", sans-serif;
+    }
+    body {
+      background-color: #f5f7fa;
+      padding: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+    .header h1 {
+      color: #2E7CD6;
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+    .header p {
+      color: #666;
+      font-size: 14px;
+    }
+    .news-section {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .news-section h2 {
+      color: #333;
+      font-size: 18px;
+      margin-bottom: 15px;
+      padding-left: 8px;
+      border-left: 4px solid #5B9BD5;
+    }
+    .news-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+      gap: 10px;
+    }
+    .news-item label {
+      width: 80px;
+      color: #666;
+      font-size: 14px;
+      text-align: right;
+    }
+    .news-item input {
+      flex: 1;
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      transition: border-color 0.2s;
+    }
+    .news-item input:focus {
+      outline: none;
+      border-color: #5B9BD5;
+      box-shadow: 0 0 0 2px rgba(91, 155, 213, 0.1);
+    }
+    .btn-group {
+      display: flex;
+      gap: 15px;
+      margin-top: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      border-radius: 4px;
+      border: none;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .btn-save {
+      background-color: #2E7CD6;
+      color: white;
+    }
+    .btn-save:hover {
+      background-color: #1E5BA8;
+    }
+    .btn-preview {
+      background-color: #70C1B3;
+      color: white;
+    }
+    .btn-preview:hover {
+      background-color: #5AA896;
+    }
+    .status {
+      margin-top: 15px;
+      padding: 10px 12px;
+      border-radius: 4px;
+      font-size: 14px;
+      display: none;
+    }
+    .status.success {
+      background-color: rgba(112, 193, 179, 0.1);
+      color: #5AA896;
+      display: block;
+    }
+    .status.error {
+      background-color: rgba(239, 83, 80, 0.1);
+      color: #EF5350;
+      display: block;
+    }
+    /* 响应式适配手机 */
+    @media (max-width: 768px) {
+      .news-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .news-item label {
+        width: auto;
+        text-align: left;
+        margin-bottom: 5px;
+      }
+      .btn-group {
+        flex-direction: column;
+      }
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 头部标题 -->
+  <div class="header">
+    <h1>光伏早报 - 云端管理后台</h1>
+    <p>编辑新闻内容并同步到腾讯云数据库</p>
+  </div>
+
+  <!-- 宏观政策板块 -->
+  <div class="news-section">
+    <h2>宏观政策</h2>
+    <div class="news-item">
+      <label>新闻1：</label>
+      <input type="text" id="policy-title-1" placeholder="请输入新闻标题">
+      <input type="text" id="policy-link-1" placeholder="请输入跳转链接（http/https开头）">
+    </div>
+    <div class="news-item">
+      <label>新闻2：</label>
+      <input type="text" id="policy-title-2" placeholder="请输入新闻标题">
+      <input type="text" id="policy-link-2" placeholder="请输入跳转链接（http/https开头）">
+    </div>
+    <div class="news-item">
+      <label>新闻3：</label>
+      <input type="text" id="policy-title-3" placeholder="请输入新闻标题">
+      <input type="text" id="policy-link-3" placeholder="请输入跳转链接（http/https开头）">
+    </div>
+  </div>
+
+  <!-- 产经动态板块 -->
+  <div class="news-section">
+    <h2>产经动态</h2>
+    <div class="news-item">
+      <label>新闻1：</label>
+      <input type="text" id="industry-title-1" placeholder="请输入新闻标题">
+      <input type="text" id="industry-link-1" placeholder="请输入跳转链接（http/https开头）">
+    </div>
+    <div class="news-item">
+      <label>新闻2：</label>
+      <input type="text" id="industry-title-2" placeholder="请输入新闻标题">
+      <input type="text" id="industry-link-2" placeholder="请输入跳转链接（http/https开头）">
+    </div>
+    <div class="news-item">
+      <label>新闻3：</label>
+      <input type="text" id="industry-title-3" placeholder="请输入新闻标题">
+      <input type="text" id="industry-link-3" placeholder="请输入跳转链接（http/https开头）">
+    </div>
+  </div>
+
+  <!-- 产技创新板块 -->
+  <div class="news-section">
+    <h2>产技创新</h2>
+    <div class="news-item">
+      <label>新闻1：</label>
+      <input type="text" id="tech-title-1" placeholder="请输入新闻标题">
+      <input type="text" id="tech-link-1" placeholder="请输入跳转链接（http/https开头）">
+    </div>
+    <div class="news-item">
+      <label>新闻2：</label>
+      <input type="text" id="tech-title-2" placeholder="请输入新闻标题">
+      <input type="text" id="tech-link-2" placeholder="请输入跳转链接（http/https开头）">
+    </div>
+    <div class="news-item">
+      <label>新闻3：</label>
+      <input type="text" id="tech-title-3" placeholder="请输入新闻标题">
+      <input type="text" id="tech-link-3" placeholder="请输入跳转链接（http/https开头）">
+    </div>
+  </div>
+
+  <!-- 操作按钮 -->
+  <div class="btn-group">
+    <button class="btn-save" id="saveToCloud">保存到腾讯云数据库</button>
+    <button class="btn-preview" id="previewIndex">预览光伏早报首页</button>
+  </div>
+
+  <!-- 状态提示 -->
+  <div class="status" id="statusMsg"></div>
+
+  <script>
+    // ================= 核心配置（必须修改！）=================
+    const CLOUD_ENV_ID = "cloud1-7gxc8e151b5db9ac"; // 替换为你的腾讯云开发环境ID
+    const DB_COLLECTION = "Daily_news"; // 数据库集合名（已创建的pv_news）
+    const INDEX_HTML_PATH = "index.html"; // 光伏早报首页文件名（如果不在同一目录，请填完整路径）
+    // ========================================================
+
+    // 初始化腾讯云开发
+    let cloud = null;
+    let db = null;
+    try {
+      cloud = TencentCloudBase.init({ env: CLOUD_ENV_ID });
+      db = cloud.database();
+      console.log("云开发环境初始化成功");
+    } catch (err) {
+      showStatus("云开发环境初始化失败：请检查环境ID是否正确", "error");
+      console.error("云开发初始化错误：", err);
+    }
+
+    // 显示状态提示
+    function showStatus(msg, type = "success") {
+      const statusEl = document.getElementById("statusMsg");
+      statusEl.textContent = msg;
+      statusEl.className = `status ${type}`;
+      // 5秒后自动清除提示
+      setTimeout(() => {
+        statusEl.className = "status";
+      }, 5000);
+    }
+
+    // 收集表单数据
+    function collectFormData() {
+      // 宏观政策
+      const policy = [
+        {
+          title: document.getElementById("policy-title-1").value.trim(),
+          link: document.getElementById("policy-link-1").value.trim()
+        },
+        {
+          title: document.getElementById("policy-title-2").value.trim(),
+          link: document.getElementById("policy-link-2").value.trim()
+        },
+        {
+          title: document.getElementById("policy-title-3").value.trim(),
+          link: document.getElementById("policy-link-3").value.trim()
+        }
+      ];
+
+      // 产经动态
+      const industry = [
+        {
+          title: document.getElementById("industry-title-1").value.trim(),
+          link: document.getElementById("industry-link-1").value.trim()
+        },
+        {
+          title: document.getElementById("industry-title-2").value.trim(),
+          link: document.getElementById("industry-link-2").value.trim()
+        },
+        {
+          title: document.getElementById("industry-title-3").value.trim(),
+          link: document.getElementById("industry-link-3").value.trim()
+        }
+      ];
+
+      // 产技创新
+      const tech = [
+        {
+          title: document.getElementById("tech-title-1").value.trim(),
+          link: document.getElementById("tech-link-1").value.trim()
+        },
+        {
+          title: document.getElementById("tech-title-2").value.trim(),
+          link: document.getElementById("tech-link-2").value.trim()
+        },
+        {
+          title: document.getElementById("tech-title-3").value.trim(),
+          link: document.getElementById("tech-link-3").value.trim()
+        }
+      ];
+
+      // 验证链接格式
+      const allLinks = [...policy, ...industry, ...tech].map(item => item.link);
+      const invalidLink = allLinks.find(link => link && !/^https?:\/\//.test(link));
+      if (invalidLink) {
+        showStatus(`链接格式错误：${invalidLink}（请以http/https开头）`, "error");
+        return null;
+      }
+
+      // 返回整理后的数据
+      return {
+        date: new Date().toISOString().split("T")[0], // 当天日期（YYYY-MM-DD）
+        updateTime: new Date().toLocaleString("zh-CN"), // 最后更新时间
+        policy,
+        industry,
+        tech
+      };
+    }
+
+    // 保存数据到云数据库
+    document.getElementById("saveToCloud").addEventListener("click", async function() {
+      if (!db) {
+        showStatus("云数据库未初始化，请检查环境ID", "error");
+        return;
+      }
+
+      const formData = collectFormData();
+      if (!formData) return;
+
+      try {
+        // 写入数据库（文档ID为"latest"，方便前端读取最新数据）
+        await db.collection(DB_COLLECTION).doc("latest").set({
+          ...formData
+        });
+        showStatus("数据保存成功！前端首页已同步更新");
+      } catch (err) {
+        showStatus(`保存失败：${err.message}`, "error");
+        console.error("数据库保存错误：", err);
+      }
+    });
+
+    // 预览首页
+    document.getElementById("previewIndex").addEventListener("click", function() {
+      window.open(INDEX_HTML_PATH, "_blank");
+    });
+  </script>
+</body>
+</html> 
