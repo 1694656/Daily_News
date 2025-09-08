@@ -2,733 +2,609 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>光伏早报 - 正大集团</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>光伏早报 - 新闻管理系统</title>
     
     <style>
-        /* ========== 全局样式重置 ========== */
+        /* ========== 全局样式 ========== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent; /* 移除移动端点击高亮 */
         }
         
-        /* ========== 基础样式 ========== */
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-            background: linear-gradient(135deg, #E8F4F8 0%, #F0F9FF 100%);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        /* ========== 背景装饰元素 ========== */
-        .bg-decoration {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            overflow: hidden;
-            z-index: -1;
-        }
-        
-        /* 左上角蓝色渐变圆形 - 添加动态效果 */
-        .bg-circle-1 {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(91, 155, 213, 0.6) 0%, rgba(91, 155, 213, 0) 70%);
-            top: -150px;
-            left: -100px;
-            border-radius: 50%;
-            animation: floatAnimation1 20s ease-in-out infinite;
-            will-change: transform;
-        }
-        
-        /* 右上角青色渐变圆形 - 添加动态效果 */
-        .bg-circle-2 {
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(129, 212, 250, 0.5) 0%, rgba(129, 212, 250, 0) 70%);
-            top: -100px;
-            right: -150px;
-            border-radius: 50%;
-            animation: floatAnimation2 25s ease-in-out infinite;
-            will-change: transform;
-        }
-        
-        /* 底部蓝色装饰 - 添加波浪动效 */
-        .bg-wave {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(180deg, transparent 0%, rgba(91, 155, 213, 0.3) 100%);
-            border-radius: 50% 50% 0 0 / 30% 30% 0 0;
-            animation: waveAnimation 30s ease-in-out infinite;
-            will-change: transform;
-        }
-        
-        /* 添加第三个动态渐变圆形 */
-        .bg-circle-3 {
-            position: absolute;
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, rgba(112, 193, 179, 0.4) 0%, rgba(112, 193, 179, 0) 70%);
-            bottom: 100px;
-            left: -100px;
-            border-radius: 50%;
-            animation: floatAnimation3 22s ease-in-out infinite;
-            will-change: transform;
-        }
-        
-        /* ========== 背景动画效果 ========== */
-        @keyframes floatAnimation1 {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-            }
-            25% {
-                transform: translate(30px, 20px) scale(1.05);
-            }
-            50% {
-                transform: translate(-20px, 40px) scale(0.95);
-            }
-            75% {
-                transform: translate(40px, -10px) scale(1.02);
-            }
-        }
-        
-        @keyframes floatAnimation2 {
-            0%, 100% {
-                transform: translate(0, 0) scale(1) rotate(0deg);
-            }
-            33% {
-                transform: translate(-40px, 30px) scale(1.08) rotate(5deg);
-            }
-            66% {
-                transform: translate(20px, -20px) scale(0.92) rotate(-3deg);
-            }
-        }
-        
-        @keyframes floatAnimation3 {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-            }
-            20% {
-                transform: translate(50px, -30px) scale(1.1);
-            }
-            40% {
-                transform: translate(-30px, -50px) scale(0.9);
-            }
-            60% {
-                transform: translate(40px, 20px) scale(1.05);
-            }
-            80% {
-                transform: translate(-20px, 40px) scale(0.95);
-            }
-        }
-        
-        @keyframes waveAnimation {
-            0%, 100% {
-                transform: translateY(0) scaleY(1);
-            }
-            50% {
-                transform: translateY(-20px) scaleY(1.1);
-            }
-        }
-        
-        /* 添加渐变色变化动画 */
-        @keyframes gradientShift {
-            0%, 100% {
-                filter: hue-rotate(0deg);
-            }
-            50% {
-                filter: hue-rotate(10deg);
-            }
-        }
-        
-        .bg-decoration {
-            animation: gradientShift 20s ease-in-out infinite;
-        }
-        
-        /* ========== 主容器 ========== */
-        .container {
-            max-width: 420px;
-            margin: 0 auto;
-            padding: 20px 15px 30px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* ========== Logo区域 ========== */
-        .logo-section {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-        
-        .logo {
-            width: 80px;
-            height: auto;
-            margin-right: 10px;
-        }
-        
-        /* ========== 标题区域 ========== */
-        .header {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        
-        .main-title {
-            font-size: 42px;
-            font-weight: bold;
-            background: linear-gradient(135deg, #2E7CD6 0%, #5B9BD5 50%, #70C1B3 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 8px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-            animation: titleGradient 5s ease infinite;
-            background-size: 200% 200%;
-        }
-        
-        @keyframes titleGradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .subtitle {
-            font-size: 18px;
-            color: #5B9BD5;
-            margin-bottom: 5px;
-        }
-        
-        .date-info {
-            font-size: 20px;
-            color: #2E7CD6;
-            font-weight: 500;
-        }
-        
-        /* ========== 新闻板块容器 ========== */
-        .news-section {
-            background: white;
-            border-radius: 20px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-        }
-        
-        /* 添加微妙的光晕效果 */
-        .news-section::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #5B9BD5, #70C1B3, #5B9BD5);
-            border-radius: 20px;
-            opacity: 0;
-            z-index: -1;
-            transition: opacity 0.3s ease;
-        }
-        
-        .news-section:hover::before {
-            opacity: 0.15;
-            animation: shimmer 3s ease infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .news-section:active {
-            transform: scale(0.98);
-        }
-        
-        /* ========== 板块标题栏 ========== */
-        .section-header {
-            background: linear-gradient(90deg, #5B9BD5 0%, #70C1B3 100%);
-            padding: 12px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        /* 添加流动光效 */
-        .section-header::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            animation: slideShine 8s linear infinite;
-        }
-        
-        @keyframes slideShine {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-        
-        .section-title {
-            font-size: 18px;
-            font-weight: 500;
-            color: white;
-        }
-        
-        .section-dots {
-            display: flex;
-            gap: 5px;
-        }
-        
-        .dot {
-            width: 6px;
-            height: 6px;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.8;
-        }
-        
-        /* ========== 新闻列表 ========== */
-        .news-list {
-            padding: 15px 20px;
-        }
-        
-        .news-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #F0F0F0;
-            min-height: 50px; /* 增加触摸区域高度 */
-            transition: background-color 0.2s ease;
-        }
-        
-        .news-item:last-child {
-            border-bottom: none;
-        }
-        
-        .news-item:active {
-            background-color: #F5F5F5;
-            margin: 0 -20px;
-            padding-left: 20px;
-            padding-right: 20px;
-        }
-        
-        /* ========== 新闻编号 ========== */
-        .news-number {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            border: 2px solid #5B9BD5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #5B9BD5;
-            font-weight: 500;
-            margin-right: 15px;
-            flex-shrink: 0;
-        }
-        
-        /* ========== 新闻标题链接 ========== */
-        .news-content {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .news-link {
-            color: #333;
-            text-decoration: none;
-            font-size: 15px;
-            line-height: 1.5;
-            flex: 1;
-            padding-right: 10px;
-            transition: color 0.2s ease;
-        }
-        
-        .news-link:hover {
-            color: #2E7CD6;
-        }
-        
-        .news-link:active {
-            color: #1E5BA8;
-        }
-        
-        /* ========== 链接箭头图标 - SVG渐变箭头 ========== */
-        .link-arrow {
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            transition: transform 0.3s ease;
-        }
-        
-        /* SVG箭头动画 */
-        .link-arrow path {
-            transition: all 0.3s ease;
-        }
-        
-        /* 悬停效果 - 箭头向右移动并变亮 */
-        .news-item:hover .link-arrow {
-            transform: translateX(5px);
-        }
-        
-        .news-item:hover .link-arrow path {
-            stroke-width: 3;
-            filter: brightness(1.2);
-        }
-        
-        /* 点击效果 */
-        .news-item:active .link-arrow {
-            transform: translateX(8px) scale(0.95);
-        }
-        
-        /* ========== 底部二维码区域 ========== */
-        .qr-section {
-            text-align: center;
-            margin-top: 30px;
             padding: 20px;
         }
         
-        .qr-placeholder {
-            width: 100px;
-            height: 100px;
+        /* ========== 容器样式 ========== */
+        .admin-container {
+            max-width: 900px;
             margin: 0 auto;
-            background: #F0F0F0;
-            border: 2px solid #DDD;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        /* ========== 标题样式 ========== */
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        /* ========== 状态栏 ========== */
+        .status-bar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .status-item {
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: #999;
+            gap: 10px;
+        }
+        
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            background: #4CAF50;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        /* ========== 工具栏 ========== */
+        .toolbar {
+            background: #F5F5F5;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .toolbar button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .btn-export {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .btn-import {
+            background: #2196F3;
+            color: white;
+        }
+        
+        .btn-wechat {
+            background: #07C160;
+            color: white;
+        }
+        
+        .btn-api {
+            background: #FF9800;
+            color: white;
+        }
+        
+        /* ========== 板块样式 ========== */
+        .section {
+            margin-bottom: 30px;
+            border: 1px solid #E0E0E0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .section-header {
+            background: linear-gradient(90deg, #5B9BD5 0%, #70C1B3 100%);
+            color: white;
+            padding: 12px 20px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .news-form {
+            padding: 20px;
+        }
+        
+        /* ========== 新闻输入组 ========== */
+        .news-input-group {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #F0F0F0;
+        }
+        
+        .news-input-group:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .news-label {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #5B9BD5;
+            color: white;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .input-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .input-wrapper {
+            flex: 1;
+        }
+        
+        .input-label {
+            display: block;
             font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
         }
         
-        /* ========== 响应式优化 ========== */
-        @media (max-width: 375px) {
-            .main-title {
-                font-size: 36px;
-            }
-            
-            .subtitle {
-                font-size: 16px;
-            }
-            
-            .news-link {
-                font-size: 14px;
-            }
+        input[type="text"], input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #DDD;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
         }
         
-        /* ========== 加载动画 ========== */
-        @keyframes fadeIn {
+        input[type="text"]:focus, input[type="date"]:focus {
+            outline: none;
+            border-color: #5B9BD5;
+            box-shadow: 0 0 0 3px rgba(91, 155, 213, 0.1);
+        }
+        
+        /* ========== 按钮样式 ========== */
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .button-group button {
+            flex: 1;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-save {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-preview {
+            background: #F0F0F0;
+            color: #333;
+        }
+        
+        .btn-preview:hover {
+            background: #E0E0E0;
+        }
+        
+        .btn-reset {
+            background: #FF6B6B;
+            color: white;
+        }
+        
+        .btn-reset:hover {
+            background: #FF5252;
+        }
+        
+        /* ========== 提示信息 ========== */
+        .message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            display: none;
+            animation: slideIn 0.3s ease;
+            z-index: 1000;
+            max-width: 400px;
+        }
+        
+        .message.success {
+            background: #4CAF50;
+        }
+        
+        .message.error {
+            background: #F44336;
+        }
+        
+        .message.info {
+            background: #2196F3;
+        }
+        
+        @keyframes slideIn {
             from {
+                transform: translateX(100%);
                 opacity: 0;
-                transform: translateY(30px) scale(0.95);
-                filter: blur(5px);
             }
             to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-                filter: blur(0);
-            }
-        }
-        
-        @keyframes slideInFromLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
                 transform: translateX(0);
+                opacity: 1;
             }
         }
         
-        .header {
-            animation: fadeIn 0.8s ease-out forwards;
+        /* ========== 模态框 ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
         }
         
-        .news-section {
-            opacity: 0;
-            animation: fadeIn 0.6s ease-out forwards;
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
         }
         
-        .news-section:nth-child(2) {
-            animation-delay: 0.2s;
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
         }
         
-        .news-section:nth-child(3) {
-            animation-delay: 0.4s;
+        .modal-close:hover {
+            color: #333;
         }
         
-        .news-section:nth-child(4) {
-            animation-delay: 0.6s;
+        .code-block {
+            background: #F5F5F5;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            word-break: break-all;
+            max-height: 400px;
+            overflow-y: auto;
+            margin: 15px 0;
         }
         
-        /* 新闻条目的渐进动画 */
-        .news-item {
-            opacity: 0;
-            animation: slideInFromLeft 0.5s ease-out forwards;
+        .copy-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
         }
         
-        .news-item:nth-child(1) { animation-delay: 0.1s; }
-        .news-item:nth-child(2) { animation-delay: 0.2s; }
-        .news-item:nth-child(3) { animation-delay: 0.3s; }
+        .copy-btn:hover {
+            background: #45a049;
+        }
+        
+        /* ========== 响应式设计 ========== */
+        @media (max-width: 600px) {
+            .admin-container {
+                padding: 20px;
+            }
+            
+            .input-row {
+                flex-direction: column;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .toolbar {
+                flex-direction: column;
+            }
+            
+            .toolbar button {
+                width: 100%;
+            }
+        }
+        
+        /* 文件上传按钮样式 */
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+        
+        .file-input-wrapper input[type=file] {
+            position: absolute;
+            left: -9999px;
+        }
+        
+        .file-input-label {
+            padding: 8px 15px;
+            background: #2196F3;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .file-input-label:hover {
+            background: #1976D2;
+        }
     </style>
 </head>
 <body>
-    <!-- 背景装饰元素 -->
-    <div class="bg-decoration">
-        <div class="bg-circle-1"></div>
-        <div class="bg-circle-2"></div>
-        <div class="bg-circle-3"></div>
-        <div class="bg-wave"></div>
-    </div>
-    
-    <!-- 主容器 -->
-    <div class="container">
-        <!-- Logo区域 -->
-        <div class="logo-section">
-            <img src="集团logo.png" alt="正大集团" class="logo" onerror="this.style.display='none'">
+    <div class="admin-container">
+        <h1>🌟 光伏早报 - 新闻管理系统</h1>
+        <p class="subtitle">统一数据管理，支持腾讯云接入和企业微信发布</p>
+        
+        <!-- 状态栏 -->
+        <div class="status-bar">
+            <div class="status-item">
+                <span class="status-indicator"></span>
+                <span>系统状态：正常</span>
+            </div>
+            <div class="status-item">
+                <span id="lastUpdateTime">最后更新：--</span>
+            </div>
         </div>
         
-        <!-- 标题区域 -->
-        <div class="header">
-            <h1 class="main-title">光伏早报</h1>
-            <p class="subtitle">30秒速读前沿新闻</p>
-            <p class="date-info">09/03 <span style="font-size: 14px; color: #999;">2023</span></p>
+        <!-- 工具栏 -->
+        <div class="toolbar">
+            <button class="btn-export" onclick="exportData()">
+                📥 导出JSON
+            </button>
+            <div class="file-input-wrapper">
+                <input type="file" id="importFile" accept=".json" onchange="importData(this)">
+                <label for="importFile" class="file-input-label">
+                    📤 导入JSON
+                </label>
+            </div>
+            <button class="btn-wechat" onclick="showWeChatMessage()">
+                💬 生成微信消息
+            </button>
+            <button class="btn-api" onclick="showAPIData()">
+                🔌 查看API数据
+            </button>
+            <button onclick="fillSampleData()" style="background: #9C27B0; color: white;">
+                ✨ 填充示例
+            </button>
+        </div>
+        
+        <!-- 日期选择 -->
+        <div style="margin: 20px 0; text-align: center;">
+            <label for="newsDate" style="margin-right: 10px;">新闻日期：</label>
+            <input type="date" id="newsDate" style="width: auto;">
         </div>
         
         <!-- 宏观政策板块 -->
-        <div class="news-section">
-            <div class="section-header">
-                <h2 class="section-title">宏观政策</h2>
-                <div class="section-dots">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                </div>
-            </div>
-            <div class="news-list">
-                <!-- 新闻1 - 可编辑超链接 -->
-                <div class="news-item">
-                    <span class="news-number">1</span>
-                    <div class="news-content">
-                        <a href="#" class="news-link" id="policy-news-1">
-                            能促业形缘错
-                        </a>
-                        <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="arrowGradient5" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+        <div class="section">
+            <div class="section-header">宏观政策</div>
+            <div class="news-form">
+                <div class="news-input-group">
+                    <div class="news-label">1</div>
+                    <div class="input-row">
+                        <div class="input-wrapper">
+                            <label class="input-label">新闻标题</label>
+                            <input type="text" id="policy-title-1" placeholder="输入新闻标题">
+                        </div>
+                        <div class="input-wrapper">
+                            <label class="input-label">链接地址</label>
+                            <input type="text" id="policy-link-1" placeholder="https://example.com 或 #">
+                        </div>
                     </div>
                 </div>
                 
-                <!-- 新闻2 - 可编辑超链接 -->
-                <div class="news-item">
-                    <span class="news-number">2</span>
-                    <div class="news-content">
-                        <a href="#" class="news-link" id="policy-news-2">
-                            光伏产业形影错误
-                        </a>
-                        <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="arrowGradient5" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                <div class="news-input-group">
+                    <div class="news-label">2</div>
+                    <div class="input-row">
+                        <div class="input-wrapper">
+                            <label class="input-label">新闻标题</label>
+                            <input type="text" id="policy-title-2" placeholder="输入新闻标题">
+                        </div>
+                        <div class="input-wrapper">
+                            <label class="input-label">链接地址</label>
+                            <input type="text" id="policy-link-2" placeholder="https://example.com 或 #">
+                        </div>
                     </div>
                 </div>
                 
-                <!-- 新闻3 - 可编辑超链接 -->
-                <div class="news-item">
-                    <span class="news-number">3</span>
-                    <div class="news-content">
-                        <a href="#" class="news-link" id="policy-news-3">
-                            在他土块安组谓
-                        </a>
-                        <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="arrowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                <div class="news-input-group">
+                    <div class="news-label">3</div>
+                    <div class="input-row">
+                        <div class="input-wrapper">
+                            <label class="input-label">新闻标题</label>
+                            <input type="text" id="policy-title-3" placeholder="输入新闻标题">
+                        </div>
+                        <div class="input-wrapper">
+                            <label class="input-label">链接地址</label>
+                            <input type="text" id="policy-link-3" placeholder="https://example.com 或 #">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         
         <!-- 产经动态板块 -->
-        <div class="news-section">
-            <div class="section-header">
-                <h2 class="section-title">产经动态</h2>
-                <div class="section-dots">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                </div>
-            </div>
-            <div class="news-list">
-                <!-- 新闻1 - 可编辑超链接 -->
-                <div class="news-item">
-                    <span class="news-number">1</span>
-                    <div class="news-content">
-                        <a href="#" class="news-link" id="industry-news-1">
-                            新根色建储
-                        </a>
-                        <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="arrowGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+        <div class="section">
+            <div class="section-header">产经动态</div>
+            <div class="news-form">
+                <div class="news-input-group">
+                    <div class="news-label">1</div>
+                    <div class="input-row">
+                        <div class="input-wrapper">
+                            <label class="input-label">新闻标题</label>
+                            <input type="text" id="industry-title-1" placeholder="输入新闻标题">
+                        </div>
+                        <div class="input-wrapper">
+                            <label class="input-label">链接地址</label>
+                            <input type="text" id="industry-link-1" placeholder="https://example.com 或 #">
+                        </div>
                     </div>
                 </div>
                 
-                <!-- 新闻2 - 可编辑超链接 -->
-                <div class="news-item">
-                    <span class="news-number">2</span>
-                    <div class="news-content">
-                        <a href="#" class="news-link" id="industry-news-2">
-                            新根储技技授指政
-                        </a>
-                        <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="arrowGradient5" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                <div class="news-input-group">
+                    <div class="news-label">2</div>
+                    <div class="input-row">
+                        <div class="input-wrapper">
+                            <label class="input-label">新闻标题</label>
+                            <input type="text" id="industry-title-2" placeholder="输入新闻标题">
+                        </div>
+                        <div class="input-wrapper">
+                            <label class="input-label">链接地址</label>
+                            <input type="text" id="industry-link-2" placeholder="https://example.com 或 #">
+                        </div>
                     </div>
                 </div>
                 
-                <!-- 新闻3 - 可编辑超链接 -->
-                <div class="news-item">
-                    <span class="news-number">3</span>
-                    <div class="news-content">
-                        <a href="#" class="news-link" id="industry-news-3">
-                            全机遍十的发配而
-                        </a>
-                        <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="arrowGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient3)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                <div class="news-input-group">
+                    <div class="news-label">3</div>
+                    <div class="input-row">
+                        <div class="input-wrapper">
+                            <label class="input-label">新闻标题</label>
+                            <input type="text" id="industry-title-3" placeholder="输入新闻标题">
+                        </div>
+                        <div class="input-wrapper">
+                            <label class="input-label">链接地址</label>
+                            <input type="text" id="industry-link-3" placeholder="https://example.com 或 #">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         
         <!-- 产技创新板块 -->
-        <div class="news-section">
-            <div class="section-header">
-                <h2 class="section-title">产技创新</h2>
-                <div class="section-dots">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                </div>
-            </div>
-            <div class="news-list">
-                <!-- 新闻1 - 可编辑超链接 -->
-                <div class="news-item">
-                    <span class="news-number">1</span>
-                    <div class="news-content">
-                        <a href="#" class="news-link" id="tech-news-1">
-                            腐根巴曝住
-                        </a>
-                        <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="arrowGradient4" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient4)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+        <div class="section">
+            <div class="section-header">产技创新</div>
+            <div class="news-form">
+                <div class="news-input-group">
+                    <div class="news-label">1</div>
+                    <div class="input-row">
+                        <div class="input-wrapper">
+                            <label class="input-label">新闻标题</label>
+                            <input type="text" id="tech-title-1" placeholder="输入新闻标题">
+                        </div>
+                        <div class="input-wrapper">
+                            <label class="input-label">链接地址</label>
+                            <input type="text" id="tech-link-1" placeholder="https://example.com 或 #">
+                        </div>
                     </div>
                 </div>
                 
-                <!-- 新闻2 - 可编辑超链接 -->
-                <div class="news-item">
-                    <span class="news-number">2</span>
-                    <div class="news-content">
-                        <a href="#" class="news-link" id="tech-news-2">
-                            光种焘的报纵
-                        </a>
-                        <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="arrowGradient5" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                <div class="news-input-group">
+                    <div class="news-label">2</div>
+                    <div class="input-row">
+                        <div class="input-wrapper">
+                            <label class="input-label">新闻标题</label>
+                            <input type="text" id="tech-title-2" placeholder="输入新闻标题">
+                        </div>
+                        <div class="input-wrapper">
+                            <label class="input-label">链接地址</label>
+                            <input type="text" id="tech-link-2" placeholder="https://example.com 或 #">
+                        </div>
                     </div>
                 </div>
                 
-                <!-- 新闻3 - 可编辑超链接 -->
-                <div class="news-item">
-                    <span class="news-number">3</span>
-                    <div class="news-content">
-                        <a href="#" class="news-link" id="tech-news-3">
-                            全他后船安潍栏
-                        </a>
-                        <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="arrowGradient5" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                <div class="news-input-group">
+                    <div class="news-label">3</div>
+                    <div class="input-row">
+                        <div class="input-wrapper">
+                            <label class="input-label">新闻标题</label>
+                            <input type="text" id="tech-title-3" placeholder="输入新闻标题">
+                        </div>
+                        <div class="input-wrapper">
+                            <label class="input-label">链接地址</label>
+                            <input type="text" id="tech-link-3" placeholder="https://example.com 或 #">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- 底部二维码区域（可选） -->
-        <div class="qr-section">
-            <div class="qr-placeholder">
-                二维码区域
-            </div>
+        <!-- 按钮组 -->
+        <div class="button-group">
+            <button class="btn-save" onclick="saveAllNews()">💾 保存并更新主页</button>
+            <button class="btn-preview" onclick="viewMainPage()">👀 查看主页</button>
+            <button class="btn-reset" onclick="resetForm()">🔄 重置表单</button>
+        </div>
+    </div>
+    
+    <!-- 提示信息 -->
+    <div id="message" class="message"></div>
+    
+    <!-- 模态框 -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">标题</h2>
+            <div id="modalBody"></div>
         </div>
     </div>
     
@@ -736,155 +612,322 @@
     <script src="js/data-manager.js"></script>
     
     <script>
-        // ========== 从统一数据源加载新闻 ==========
-        let newsData = null;
-        
-        // ========== 初始化新闻内容 ==========
-        function initNews() {
-            // 从本地存储加载数据
-            newsData = window.newsDataManager.loadData();
-            console.log('加载新闻数据:', newsData);
-            
-            // 更新宏观政策板块
-            document.getElementById('policy-news-1').textContent = newsData.policy.news1.title;
-            document.getElementById('policy-news-1').href = newsData.policy.news1.link;
-            document.getElementById('policy-news-2').textContent = newsData.policy.news2.title;
-            document.getElementById('policy-news-2').href = newsData.policy.news2.link;
-            document.getElementById('policy-news-3').textContent = newsData.policy.news3.title;
-            document.getElementById('policy-news-3').href = newsData.policy.news3.link;
-            
-            // 更新产经动态板块
-            document.getElementById('industry-news-1').textContent = newsData.industry.news1.title;
-            document.getElementById('industry-news-1').href = newsData.industry.news1.link;
-            document.getElementById('industry-news-2').textContent = newsData.industry.news2.title;
-            document.getElementById('industry-news-2').href = newsData.industry.news2.link;
-            document.getElementById('industry-news-3').textContent = newsData.industry.news3.title;
-            document.getElementById('industry-news-3').href = newsData.industry.news3.link;
-            
-            // 更新产技创新板块
-            document.getElementById('tech-news-1').textContent = newsData.tech.news1.title;
-            document.getElementById('tech-news-1').href = newsData.tech.news1.link;
-            document.getElementById('tech-news-2').textContent = newsData.tech.news2.title;
-            document.getElementById('tech-news-2').href = newsData.tech.news2.link;
-            document.getElementById('tech-news-3').textContent = newsData.tech.news3.title;
-            document.getElementById('tech-news-3').href = newsData.tech.news3.link;
-            
-            // 更新日期显示（使用数据中的日期）
-            if (newsData.date) {
-                const date = new Date(newsData.date + 'T00:00:00');
-                const month = String(date.getMonth() + 1).padStart(2, '0');
-                const day = String(date.getDate()).padStart(2, '0');
-                const year = date.getFullYear();
-                
-                const dateElement = document.querySelector('.date-info');
-                if (dateElement) {
-                    dateElement.innerHTML = `${month}/${day} <span style="font-size: 14px; color: #999;">${year}</span>`;
-                }
-            }
-            
-            // 显示最后更新时间
-            const updateTime = window.newsDataManager.getLastUpdateTime();
-            console.log('最后更新时间:', updateTime);
-        }
-        
-        // ========== 更新日期显示 ==========
-        function updateDate() {
-            const now = new Date();
-            const month = String(now.getMonth() + 1).padStart(2, '0');
-            const day = String(now.getDate()).padStart(2, '0');
-            const year = now.getFullYear();
-            
-            // 更新日期显示
-            const dateElement = document.querySelector('.date-info');
-            if (dateElement) {
-                dateElement.innerHTML = `${month}/${day} <span style="font-size: 14px; color: #999;">${year}</span>`;
-            }
-        }
-        
-        // ========== 添加点击统计（可选） ==========
-        function trackClick(category, newsId) {
-            console.log(`用户点击了 ${category} 板块的新闻 ${newsId}`);
-            // 这里可以添加统计代码，如 Google Analytics
-        }
-        
-        // ========== 绑定点击事件 ==========
-        document.querySelectorAll('.news-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                const id = this.id;
-                const category = id.split('-')[0];
-                const newsNumber = id.split('-')[2];
-                trackClick(category, newsNumber);
-                
-                // 如果链接是 #，则阻止默认行为
-                if (this.href.endsWith('#')) {
-                    e.preventDefault();
-                    alert('请先配置新闻链接地址');
-                }
-            });
-        });
-        
-        // ========== 页面加载完成后初始化 ==========
+        // ========== 初始化 ==========
         document.addEventListener('DOMContentLoaded', function() {
-            initNews();
-            updateDate();
-            initParallaxEffect();
+            loadSavedNews();
+            updateLastUpdateTime();
         });
         
-        // ========== 添加视差滚动效果 ==========
-        function initParallaxEffect() {
-            const bgCircles = document.querySelectorAll('.bg-circle-1, .bg-circle-2, .bg-circle-3');
-            const bgWave = document.querySelector('.bg-wave');
+        // ========== 加载已保存的新闻 ==========
+        function loadSavedNews() {
+            const data = window.newsDataManager.loadData();
             
-            let ticking = false;
-            function updateParallax() {
-                const scrolled = window.pageYOffset;
-                
-                bgCircles.forEach((circle, index) => {
-                    const speed = 0.5 + (index * 0.1);
-                    const yPos = -(scrolled * speed);
-                    circle.style.transform = `translateY(${yPos}px)`;
-                });
-                
-                if (bgWave) {
-                    bgWave.style.transform = `translateY(${scrolled * 0.3}px)`;
-                }
-                
-                ticking = false;
-            }
-            
-            function requestTick() {
-                if (!ticking) {
-                    window.requestAnimationFrame(updateParallax);
-                    ticking = true;
-                }
-            }
-            
-            window.addEventListener('scroll', requestTick);
-        }
-        
-        // ========== 便捷更新函数（供手动调用） ==========
-        // 使用示例：updateNews('policy', 1, '新的新闻标题', 'https://example.com')
-        function updateNews(category, number, title, link) {
-            const elementId = `${category}-news-${number}`;
-            const element = document.getElementById(elementId);
-            if (element) {
-                element.textContent = title;
-                element.href = link;
-                console.log(`已更新：${category} 板块的第 ${number} 条新闻`);
+            // 填充日期
+            if (data.date) {
+                document.getElementById('newsDate').value = data.date;
             } else {
-                console.error(`找不到元素：${elementId}`);
+                // 如果没有保存的日期，使用今天
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById('newsDate').value = today;
+            }
+            
+            // 填充宏观政策
+            fillNewsSection('policy', data.policy);
+            
+            // 填充产经动态
+            fillNewsSection('industry', data.industry);
+            
+            // 填充产技创新
+            fillNewsSection('tech', data.tech);
+            
+            updateLastUpdateTime();
+        }
+        
+        // ========== 填充板块数据 ==========
+        function fillNewsSection(section, data) {
+            if (!data) return;
+            
+            for (let i = 1; i <= 3; i++) {
+                const newsKey = `news${i}`;
+                if (data[newsKey]) {
+                    const titleInput = document.getElementById(`${section}-title-${i}`);
+                    const linkInput = document.getElementById(`${section}-link-${i}`);
+                    
+                    if (titleInput) titleInput.value = data[newsKey].title || '';
+                    if (linkInput) linkInput.value = data[newsKey].link || '';
+                }
             }
         }
         
-        // ========== 批量更新函数 ==========
-        // 使用示例：batchUpdate('policy', [{title: '新闻1', link: 'url1'}, {title: '新闻2', link: 'url2'}, {title: '新闻3', link: 'url3'}])
-        function batchUpdate(category, newsArray) {
-            newsArray.forEach((news, index) => {
-                if (news.title && news.link) {
-                    updateNews(category, index + 1, news.title, news.link);
-                }
-            });
+        // ========== 保存所有新闻 ==========
+        function saveAllNews() {
+            const newsData = {
+                date: document.getElementById('newsDate').value,
+                policy: collectSectionData('policy'),
+                industry: collectSectionData('industry'),
+                tech: collectSectionData('tech')
+            };
+            
+            // 验证链接格式
+            if (!validateLinks()) {
+                return;
+            }
+            
+            // 保存到本地存储
+            const success = window.newsDataManager.saveData(newsData);
+            
+            if (success) {
+                showMessage('✅ 保存成功！数据已同步到主页', 'success');
+                updateLastUpdateTime();
+                
+                // 延迟一秒后刷新主页（如果在同一窗口打开）
+                setTimeout(() => {
+                    if (window.opener) {
+                        window.opener.location.reload();
+                    }
+                }, 1000);
+            } else {
+                showMessage('❌ 保存失败，请重试', 'error');
+            }
         }
+        
+        // ========== 收集板块数据 ==========
+        function collectSectionData(section) {
+            const data = {};
+            for (let i = 1; i <= 3; i++) {
+                const title = document.getElementById(`${section}-title-${i}`).value || '待更新新闻';
+                const link = document.getElementById(`${section}-link-${i}`).value || '#';
+                
+                data[`news${i}`] = { title, link };
+            }
+            return data;
+        }
+        
+        // ========== 验证链接格式 ==========
+        function validateLinks() {
+            const links = document.querySelectorAll('input[id*="link-"]');
+            for (let link of links) {
+                const value = link.value.trim();
+                if (value && value !== '#' && 
+                    !value.startsWith('http://') && 
+                    !value.startsWith('https://')) {
+                    showMessage('⚠️ 链接必须以 http:// 或 https:// 开头，或使用 # 作为占位符', 'error');
+                    link.focus();
+                    link.style.borderColor = '#F44336';
+                    setTimeout(() => {
+                        link.style.borderColor = '#DDD';
+                    }, 3000);
+                    return false;
+                }
+            }
+            return true;
+        }
+        
+        // ========== 查看主页 ==========
+        function viewMainPage() {
+            // 先保存当前数据
+            saveAllNews();
+            
+            // 在新窗口打开主页
+            window.open('index.html', '_blank');
+        }
+        
+        // ========== 重置表单 ==========
+        function resetForm() {
+            if (confirm('确定要重置所有输入内容吗？这将清除所有未保存的更改。')) {
+                document.querySelectorAll('input[type="text"]').forEach(input => {
+                    input.value = '';
+                });
+                showMessage('表单已重置', 'info');
+            }
+        }
+        
+        // ========== 导出数据 ==========
+        function exportData() {
+            const filename = window.newsDataManager.exportToJSON();
+            showMessage(`✅ 数据已导出为: ${filename}`, 'success');
+        }
+        
+        // ========== 导入数据 ==========
+        function importData(input) {
+            const file = input.files[0];
+            if (!file) return;
+            
+            window.newsDataManager.importFromJSON(file)
+                .then(data => {
+                    loadSavedNews();
+                    showMessage('✅ 数据导入成功！', 'success');
+                    input.value = ''; // 清空文件选择
+                })
+                .catch(error => {
+                    showMessage('❌ 导入失败：' + error.message, 'error');
+                    input.value = '';
+                });
+        }
+        
+        // ========== 显示企业微信消息 ==========
+        function showWeChatMessage() {
+            const message = window.newsDataManager.generateWeChatMessage();
+            const markdown = window.newsDataManager.generateMarkdown();
+            
+            const modalBody = `
+                <h3>📱 企业微信文本消息</h3>
+                <div class="code-block">${escapeHtml(message)}</div>
+                <button class="copy-btn" onclick="copyToClipboard('${escapeHtml(message)}')">复制文本消息</button>
+                
+                <h3 style="margin-top: 20px;">📋 Markdown格式（支持富文本）</h3>
+                <div class="code-block">${escapeHtml(markdown)}</div>
+                <button class="copy-btn" onclick="copyToClipboard('${escapeHtml(markdown)}')">复制Markdown</button>
+            `;
+            
+            showModal('企业微信消息格式', modalBody);
+        }
+        
+        // ========== 显示API数据 ==========
+        function showAPIData() {
+            const apiData = window.newsDataManager.generateAPIData();
+            const jsonStr = JSON.stringify(apiData, null, 2);
+            
+            const modalBody = `
+                <h3>🔌 API数据格式（用于腾讯云接入）</h3>
+                <p style="color: #666; margin: 10px 0;">以下是格式化的JSON数据，可以直接用于API调用：</p>
+                <div class="code-block">${escapeHtml(jsonStr)}</div>
+                <button class="copy-btn" onclick="copyToClipboard('${escapeHtml(jsonStr)}')">复制JSON</button>
+                
+                <h3 style="margin-top: 20px;">📡 接入说明</h3>
+                <ul style="color: #666; line-height: 1.8;">
+                    <li>API端点：您的腾讯云函数URL</li>
+                    <li>请求方法：POST</li>
+                    <li>Content-Type：application/json</li>
+                    <li>请求体：上述JSON数据</li>
+                </ul>
+            `;
+            
+            showModal('API数据格式', modalBody);
+        }
+        
+        // ========== 填充示例数据 ==========
+        function fillSampleData() {
+            // 宏观政策
+            document.getElementById('policy-title-1').value = '国家能源局发布光伏发展新政策';
+            document.getElementById('policy-link-1').value = 'https://www.nea.gov.cn';
+            document.getElementById('policy-title-2').value = '光伏产业链价格指导意见出台';
+            document.getElementById('policy-link-2').value = 'https://example.com/news1';
+            document.getElementById('policy-title-3').value = '各地分布式光伏补贴政策汇总';
+            document.getElementById('policy-link-3').value = 'https://example.com/news2';
+            
+            // 产经动态
+            document.getElementById('industry-title-1').value = '隆基绿能发布新一代光伏组件';
+            document.getElementById('industry-link-1').value = 'https://www.longi.com';
+            document.getElementById('industry-title-2').value = '天合光能签订10GW组件订单';
+            document.getElementById('industry-link-2').value = 'https://example.com/news3';
+            document.getElementById('industry-title-3').value = '全球光伏装机容量突破1TW';
+            document.getElementById('industry-link-3').value = 'https://example.com/news4';
+            
+            // 产技创新
+            document.getElementById('tech-title-1').value = '钙钛矿电池效率突破26%';
+            document.getElementById('tech-link-1').value = 'https://example.com/news5';
+            document.getElementById('tech-title-2').value = 'TOPCon技术路线成为主流';
+            document.getElementById('tech-link-2').value = 'https://example.com/news6';
+            document.getElementById('tech-title-3').value = '异质结电池成本大幅下降';
+            document.getElementById('tech-link-3').value = 'https://example.com/news7';
+            
+            showMessage('✨ 已填充示例数据', 'success');
+        }
+        
+        // ========== 更新最后更新时间 ==========
+        function updateLastUpdateTime() {
+            const updateTime = window.newsDataManager.getLastUpdateTime();
+            document.getElementById('lastUpdateTime').textContent = `最后更新：${updateTime}`;
+        }
+        
+        // ========== 显示提示信息 ==========
+        function showMessage(text, type = 'success') {
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = text;
+            messageEl.className = `message ${type}`;
+            messageEl.style.display = 'block';
+            
+            setTimeout(() => {
+                messageEl.style.display = 'none';
+            }, 5000);
+        }
+        
+        // ========== 模态框相关 ==========
+        function showModal(title, body) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalBody').innerHTML = body;
+            document.getElementById('modal').style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+        
+        // ========== 工具函数 ==========
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+        
+        function copyToClipboard(text) {
+            // 反转义HTML
+            const textarea = document.createElement('textarea');
+            textarea.innerHTML = text;
+            const decodedText = textarea.value;
+            
+            // 复制到剪贴板
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(decodedText).then(() => {
+                    showMessage('✅ 已复制到剪贴板', 'success');
+                }).catch(err => {
+                    showMessage('❌ 复制失败，请手动复制', 'error');
+                });
+            } else {
+                // 兼容旧版浏览器
+                textarea.value = decodedText;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    showMessage('✅ 已复制到剪贴板', 'success');
+                } catch (err) {
+                    showMessage('❌ 复制失败，请手动复制', 'error');
+                }
+                document.body.removeChild(textarea);
+            }
+        }
+        
+        // 点击模态框外部关闭
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+        
+        // 监听键盘快捷键
+        document.addEventListener('keydown', function(e) {
+            // Ctrl+S 保存
+            if (e.ctrlKey && e.key === 's') {
+                e.preventDefault();
+                saveAllNews();
+            }
+            
+            // Ctrl+Shift+F 填充示例数据
+            if (e.ctrlKey && e.shiftKey && e.key === 'F') {
+                e.preventDefault();
+                fillSampleData();
+            }
+        });
     </script>
 </body>
 </html>
