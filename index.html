@@ -732,19 +732,59 @@
         </div>
     </div>
     
-    <!-- 引入数据管理模块 -->
-    <script src="js/data-manager.js"></script>
-    
     <script>
-        // ========== 从统一数据源加载新闻 ==========
-        let newsData = null;
+        // ========== 新闻数据管理 ==========
+        // 这里可以方便地更新每条新闻的标题和链接
+        const newsData = {
+            // 宏观政策板块
+            policy: {
+                news1: {
+                    title: "能促业形缘错",  // 修改这里更新新闻标题
+                    link: "#"  // 修改这里更新新闻链接
+                },
+                news2: {
+                    title: "光伏产业形影错误",
+                    link: "#"
+                },
+                news3: {
+                    title: "在他土块安组谓",
+                    link: "#"
+                }
+            },
+            // 产经动态板块
+            industry: {
+                news1: {
+                    title: "新根色建储",
+                    link: "#"
+                },
+                news2: {
+                    title: "新根储技技授指政",
+                    link: "#"
+                },
+                news3: {
+                    title: "全机遍十的发配而",
+                    link: "#"
+                }
+            },
+            // 产技创新板块
+            tech: {
+                news1: {
+                    title: "腐根巴曝住",
+                    link: "#"
+                },
+                news2: {
+                    title: "光种焘的报纵",
+                    link: "#"
+                },
+                news3: {
+                    title: "全他后船安潍栏",
+                    link: "#"
+                }
+            }
+        };
         
         // ========== 初始化新闻内容 ==========
         function initNews() {
-            // 从本地存储加载数据
-            newsData = window.newsDataManager.loadData();
-            console.log('加载新闻数据:', newsData);
-            
             // 更新宏观政策板块
             document.getElementById('policy-news-1').textContent = newsData.policy.news1.title;
             document.getElementById('policy-news-1').href = newsData.policy.news1.link;
@@ -768,23 +808,6 @@
             document.getElementById('tech-news-2').href = newsData.tech.news2.link;
             document.getElementById('tech-news-3').textContent = newsData.tech.news3.title;
             document.getElementById('tech-news-3').href = newsData.tech.news3.link;
-            
-            // 更新日期显示（使用数据中的日期）
-            if (newsData.date) {
-                const date = new Date(newsData.date + 'T00:00:00');
-                const month = String(date.getMonth() + 1).padStart(2, '0');
-                const day = String(date.getDate()).padStart(2, '0');
-                const year = date.getFullYear();
-                
-                const dateElement = document.querySelector('.date-info');
-                if (dateElement) {
-                    dateElement.innerHTML = `${month}/${day} <span style="font-size: 14px; color: #999;">${year}</span>`;
-                }
-            }
-            
-            // 显示最后更新时间
-            const updateTime = window.newsDataManager.getLastUpdateTime();
-            console.log('最后更新时间:', updateTime);
         }
         
         // ========== 更新日期显示 ==========
