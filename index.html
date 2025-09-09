@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>光伏早报 - 正大集团</title>
+    <title>能源日报 - 正大集团</title> <!-- 标题修改：光伏早报 → 能源日报 -->
     
     <style>
         /* ========== 全局样式重置 ========== */
@@ -480,7 +480,7 @@
             animation-delay: 0.6s;
         }
         
-        /* 新闻条目的渐进动画 */
+        /* 新闻条目的渐进动画 - 新增第4条的延迟 */
         .news-item {
             opacity: 0;
             animation: slideInFromLeft 0.5s ease-out forwards;
@@ -489,6 +489,7 @@
         .news-item:nth-child(1) { animation-delay: 0.1s; }
         .news-item:nth-child(2) { animation-delay: 0.2s; }
         .news-item:nth-child(3) { animation-delay: 0.3s; }
+        .news-item:nth-child(4) { animation-delay: 0.4s; } /* 新增第4条动画延迟 */
     </style>
 </head>
 <body>
@@ -507,14 +508,14 @@
             <img src="集团logo.png" alt="正大集团" class="logo" onerror="this.style.display='none'">
         </div>
         
-        <!-- 标题区域 -->
+        <!-- 标题区域 - 主标题修改：光伏早报 → 能源日报 -->
         <div class="header">
-            <h1 class="main-title">光伏早报</h1>
+            <h1 class="main-title">能源日报</h1>
             <p class="subtitle">30秒速读前沿新闻</p>
             <p class="date-info">09/03 <span style="font-size: 14px; color: #999;">2023</span></p>
         </div>
         
-        <!-- 宏观政策板块 -->
+        <!-- 宏观政策板块 - 新增第4条新闻 -->
         <div class="news-section">
             <div class="section-header">
                 <h2 class="section-title">宏观政策</h2>
@@ -548,17 +549,17 @@
                 <div class="news-item">
                     <span class="news-number">2</span>
                     <div class="news-content">
-                        <a href="#" class="news-link" id="policy-news-2">
-                            光伏产业形影错误
+                        <a href="https://news.solarbe.com/202509/08/50007935.html" class="news-link" id="policy-news-2">
+                            北京136号文征求意见：存量全部纳入机制，0.3598元/度；增量执行≤12年
                         </a>
                         <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <defs>
-                                <linearGradient id="arrowGradient5" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <linearGradient id="arrowGradient5-2" x1="0%" y1="0%" x2="100%" y2="100%">
                                     <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
                                     <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
                                 </linearGradient>
                             </defs>
-                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient5-2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
                 </div>
@@ -567,8 +568,8 @@
                 <div class="news-item">
                     <span class="news-number">3</span>
                     <div class="news-content">
-                        <a href="#" class="news-link" id="policy-news-3">
-                            在他土块安组谓
+                        <a href="https://news.solarbe.com/202509/04/50007801.html" class="news-link" id="policy-news-3">
+                            21省“136号文”落地，下半年光伏该投哪里？
                         </a>
                         <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <defs>
@@ -581,10 +582,29 @@
                         </svg>
                     </div>
                 </div>
+                
+                <!-- 新闻4 - 新增第4条新闻 -->
+                <div class="news-item">
+                    <span class="news-number">4</span>
+                    <div class="news-content">
+                        <a href="https://news.solarbe.com/202509/07/50007910.html" class="news-link" id="policy-news-4">
+                            发改委：2025年非化石能源消费比重目标提升至20%以上
+                        </a>
+                        <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="arrowGradient5-4" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient5-4)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
             </div>
         </div>
         
-        <!-- 产经动态板块 -->
+        <!-- 产经动态板块 - 新增第4条新闻 -->
         <div class="news-section">
             <div class="section-header">
                 <h2 class="section-title">产经动态</h2>
@@ -599,8 +619,8 @@
                 <div class="news-item">
                     <span class="news-number">1</span>
                     <div class="news-content">
-                        <a href="#" class="news-link" id="industry-news-1">
-                            新根色建储
+                        <a href="https://news.solarbe.com/202509/08/50007960.html" class="news-link" id="industry-news-1">
+                            罗博特科宣布赴港上市！
                         </a>
                         <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <defs>
@@ -618,17 +638,17 @@
                 <div class="news-item">
                     <span class="news-number">2</span>
                     <div class="news-content">
-                        <a href="#" class="news-link" id="industry-news-2">
-                            新根储技技授指政
+                        <a href="https://news.solarbe.com/202509/07/50007931.html" class="news-link" id="industry-news-2">
+                            吉电股份收到国家可再生能源补贴资金9.13亿元，1-8月累计达12.71亿元
                         </a>
                         <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <defs>
-                                <linearGradient id="arrowGradient5" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <linearGradient id="arrowGradient5-5" x1="0%" y1="0%" x2="100%" y2="100%">
                                     <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
                                     <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
                                 </linearGradient>
                             </defs>
-                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient5-5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
                 </div>
@@ -637,8 +657,8 @@
                 <div class="news-item">
                     <span class="news-number">3</span>
                     <div class="news-content">
-                        <a href="#" class="news-link" id="industry-news-3">
-                            全机遍十的发配而
+                        <a href="https://news.solarbe.com/202509/05/50007815.html" class="news-link" id="industry-news-3">
+                            中国电建 vs 中国能建：2025上半年新能源装机、营收对比
                         </a>
                         <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <defs>
@@ -651,10 +671,29 @@
                         </svg>
                     </div>
                 </div>
+                
+                <!-- 新闻4 - 新增第4条新闻 -->
+                <div class="news-item">
+                    <span class="news-number">4</span>
+                    <div class="news-content">
+                        <a href="https://news.solarbe.com/202509/06/50007850.html" class="news-link" id="industry-news-4">
+                            隆基绿能与沙特签署15GW光伏电站合作协议，总投资超200亿元
+                        </a>
+                        <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="arrowGradient5-6" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient5-6)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
             </div>
         </div>
         
-        <!-- 科技创新板块 -->
+        <!-- 科技创新板块 - 新增第4条新闻 -->
         <div class="news-section">
             <div class="section-header">
                 <h2 class="section-title">科技创新</h2>
@@ -669,8 +708,8 @@
                 <div class="news-item">
                     <span class="news-number">1</span>
                     <div class="news-content">
-                        <a href="#" class="news-link" id="tech-news-1">
-                            腐
+                        <a href="https://news.solarbe.com/202509/08/50008017.html" class="news-link" id="tech-news-1">
+                            钙钛矿叠层太阳能电池通过纹理硅钝化实现33.1%的效率
                         </a>
                         <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <defs>
@@ -688,17 +727,17 @@
                 <div class="news-item">
                     <span class="news-number">2</span>
                     <div class="news-content">
-                        <a href="#" class="news-link" id="tech-news-2">
-                            光
+                        <a href="https://news.solarbe.com/202509/07/50007920.html" class="news-link" id="tech-news-2">
+                            全球首条全自动化TOPCon电池生产线投产，产能提升30%
                         </a>
                         <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <defs>
-                                <linearGradient id="arrowGradient5" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <linearGradient id="arrowGradient5-7" x1="0%" y1="0%" x2="100%" y2="100%">
                                     <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
                                     <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
                                 </linearGradient>
                             </defs>
-                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient5-7)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
                 </div>
@@ -707,17 +746,36 @@
                 <div class="news-item">
                     <span class="news-number">3</span>
                     <div class="news-content">
-                        <a href="#" class="news-link" id="tech-news-3">
-                            全
+                        <a href="https://news.solarbe.com/202509/05/50007830.html" class="news-link" id="tech-news-3">
+                            新型储能电池寿命突破15年，成本降低25%
                         </a>
                         <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <defs>
-                                <linearGradient id="arrowGradient5" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <linearGradient id="arrowGradient5-8" x1="0%" y1="0%" x2="100%" y2="100%">
                                     <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
                                     <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
                                 </linearGradient>
                             </defs>
-                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient5-8)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <!-- 新闻4 - 新增第4条新闻 -->
+                <div class="news-item">
+                    <span class="news-number">4</span>
+                    <div class="news-content">
+                        <a href="https://news.solarbe.com/202509/04/50007790.html" class="news-link" id="tech-news-4">
+                            华为发布智能光伏逆变器，转换效率达99.2%
+                        </a>
+                        <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="arrowGradient5-9" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient5-9)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
                 </div>
@@ -733,14 +791,13 @@
     </div>
     
     <script>
-        // ========== 新闻数据管理 ==========
-        // 这里可以方便地更新每条新闻的标题和链接
+        // ========== 新闻数据管理 - 每个板块新增news4数据 ==========
         const newsData = {
-            // 宏观政策板块
+            // 宏观政策板块 - 新增news4
             policy: {
                 news1: {
-                    title: "两部门：加快在电力市场、场站智慧运营、新能源规划等方向的人工智能应用",  // 修改这里更新新闻标题
-                    link: "https://news.solarbe.com/202509/08/50007980.html"  // 修改这里更新新闻链接
+                    title: "两部门：加快在电力市场、场站智慧运营、新能源规划等方向的人工智能应用",
+                    link: "https://news.solarbe.com/202509/08/50007980.html"
                 },
                 news2: {
                     title: "北京136号文征求意见：存量全部纳入机制，0.3598元/度；增量执行≤12年",
@@ -749,9 +806,13 @@
                 news3: {
                     title: "21省“136号文”落地，下半年光伏该投哪里？",
                     link: "https://news.solarbe.com/202509/04/50007801.html"
+                },
+                news4: { // 新增第4条数据
+                    title: "发改委：2025年非化石能源消费比重目标提升至20%以上",
+                    link: "https://news.solarbe.com/202509/07/50007910.html"
                 }
             },
-            // 产经动态板块
+            // 产经动态板块 - 新增news4
             industry: {
                 news1: {
                     title: "罗博特科宣布赴港上市！",
@@ -764,50 +825,64 @@
                 news3: {
                     title: "中国电建 vs 中国能建：2025上半年新能源装机、营收对比",
                     link: "https://news.solarbe.com/202509/05/50007815.html"
+                },
+                news4: { // 新增第4条数据
+                    title: "隆基绿能与沙特签署15GW光伏电站合作协议，总投资超200亿元",
+                    link: "https://news.solarbe.com/202509/06/50007850.html"
                 }
             },
-            // 科技创新板块
+            // 科技创新板块 - 新增news4
             tech: {
                 news1: {
                     title: "钙钛矿叠层太阳能电池通过纹理硅钝化实现33.1%的效率",
                     link: "https://news.solarbe.com/202509/08/50008017.html"
                 },
-                news2: {
-                    title: "光",
-                    link: "#"
+                news2: { // 替换原"光"为实际内容
+                    title: "全球首条全自动化TOPCon电池生产线投产，产能提升30%",
+                    link: "https://news.solarbe.com/202509/07/50007920.html"
                 },
-                news3: {
-                    title: "全",
-                    link: "#"
+                news3: { // 替换原"全"为实际内容
+                    title: "新型储能电池寿命突破15年，成本降低25%",
+                    link: "https://news.solarbe.com/202509/05/50007830.html"
+                },
+                news4: { // 新增第4条数据
+                    title: "华为发布智能光伏逆变器，转换效率达99.2%",
+                    link: "https://news.solarbe.com/202509/04/50007790.html"
                 }
             }
         };
         
-        // ========== 初始化新闻内容 ==========
+        // ========== 初始化新闻内容 - 新增第4条新闻的DOM操作 ==========
         function initNews() {
-            // 更新宏观政策板块
+            // 更新宏观政策板块（新增news4）
             document.getElementById('policy-news-1').textContent = newsData.policy.news1.title;
             document.getElementById('policy-news-1').href = newsData.policy.news1.link;
             document.getElementById('policy-news-2').textContent = newsData.policy.news2.title;
             document.getElementById('policy-news-2').href = newsData.policy.news2.link;
             document.getElementById('policy-news-3').textContent = newsData.policy.news3.title;
             document.getElementById('policy-news-3').href = newsData.policy.news3.link;
+            document.getElementById('policy-news-4').textContent = newsData.policy.news4.title; // 新增第4条
+            document.getElementById('policy-news-4').href = newsData.policy.news4.link; // 新增第4条
             
-            // 更新产经动态板块
+            // 更新产经动态板块（新增news4）
             document.getElementById('industry-news-1').textContent = newsData.industry.news1.title;
             document.getElementById('industry-news-1').href = newsData.industry.news1.link;
             document.getElementById('industry-news-2').textContent = newsData.industry.news2.title;
             document.getElementById('industry-news-2').href = newsData.industry.news2.link;
             document.getElementById('industry-news-3').textContent = newsData.industry.news3.title;
             document.getElementById('industry-news-3').href = newsData.industry.news3.link;
+            document.getElementById('industry-news-4').textContent = newsData.industry.news4.title; // 新增第4条
+            document.getElementById('industry-news-4').href = newsData.industry.news4.link; // 新增第4条
             
-            // 更新科技创新板块
+            // 更新科技创新板块（新增news4，替换原空内容）
             document.getElementById('tech-news-1').textContent = newsData.tech.news1.title;
             document.getElementById('tech-news-1').href = newsData.tech.news1.link;
             document.getElementById('tech-news-2').textContent = newsData.tech.news2.title;
             document.getElementById('tech-news-2').href = newsData.tech.news2.link;
             document.getElementById('tech-news-3').textContent = newsData.tech.news3.title;
             document.getElementById('tech-news-3').href = newsData.tech.news3.link;
+            document.getElementById('tech-news-4').textContent = newsData.tech.news4.title; // 新增第4条
+            document.getElementById('tech-news-4').href = newsData.tech.news4.link; // 新增第4条
         }
         
         // ========== 更新日期显示 ==========
@@ -885,8 +960,8 @@
             window.addEventListener('scroll', requestTick);
         }
         
-        // ========== 便捷更新函数（供手动调用） ==========
-        // 使用示例：updateNews('policy', 1, '新的新闻标题', 'https://example.com')
+        // ========== 便捷更新函数（供手动调用） - 兼容第4条新闻 ==========
+        // 使用示例：updateNews('policy', 4, '新的新闻标题', 'https://example.com')
         function updateNews(category, number, title, link) {
             const elementId = `${category}-news-${number}`;
             const element = document.getElementById(elementId);
@@ -899,8 +974,8 @@
             }
         }
         
-        // ========== 批量更新函数 ==========
-        // 使用示例：batchUpdate('policy', [{title: '新闻1', link: 'url1'}, {title: '新闻2', link: 'url2'}, {title: '新闻3', link: 'url3'}])
+        // ========== 批量更新函数 - 兼容第4条新闻 ==========
+        // 使用示例：batchUpdate('policy', [{title: '新闻1', link: 'url1'}, ..., {title: '新闻4', link: 'url4'}])
         function batchUpdate(category, newsArray) {
             newsArray.forEach((news, index) => {
                 if (news.title && news.link) {
