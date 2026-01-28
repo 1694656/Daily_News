@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>能源日报 - 正大集团</title> <!-- 标题修改：光伏早报 → 能源日报 -->
+    <title>正大新能源月报</title>
     
     <style>
         /* ========== 全局样式重置 ========== */
@@ -11,10 +11,9 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent; /* 移除移动端点击高亮 */
+            -webkit-tap-highlight-color: transparent;
         }
         
-        /* ========== 基础样式 ========== */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
             background: linear-gradient(135deg, #E8F4F8 0%, #F0F9FF 100%);
@@ -23,966 +22,195 @@
             overflow-x: hidden;
         }
         
-        /* ========== 背景装饰元素 ========== */
+        /* 背景动画元素 */
         .bg-decoration {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
+            width: 100%; height: 100%;
+            top: 0; left: 0;
             overflow: hidden;
             z-index: -1;
         }
         
-        /* 左上角蓝色渐变圆形 - 添加动态效果 */
         .bg-circle-1 {
             position: absolute;
-            width: 300px;
-            height: 300px;
+            width: 300px; height: 300px;
             background: radial-gradient(circle, rgba(91, 155, 213, 0.6) 0%, rgba(91, 155, 213, 0) 70%);
-            top: -150px;
-            left: -100px;
+            top: -150px; left: -100px;
             border-radius: 50%;
-            animation: floatAnimation1 20s ease-in-out infinite;
-            will-change: transform;
+            animation: float1 20s ease-in-out infinite;
         }
         
-        /* 右上角青色渐变圆形 - 添加动态效果 */
         .bg-circle-2 {
             position: absolute;
-            width: 400px;
-            height: 400px;
+            width: 400px; height: 400px;
             background: radial-gradient(circle, rgba(129, 212, 250, 0.5) 0%, rgba(129, 212, 250, 0) 70%);
-            top: -100px;
-            right: -150px;
+            top: -100px; right: -150px;
             border-radius: 50%;
-            animation: floatAnimation2 25s ease-in-out infinite;
-            will-change: transform;
+            animation: float2 25s ease-in-out infinite;
         }
+
+        @keyframes float1 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(30px, 40px); } }
+        @keyframes float2 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-40px, 20px); } }
         
-        /* 底部蓝色装饰 - 添加波浪动效 */
-        .bg-wave {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(180deg, transparent 0%, rgba(91, 155, 213, 0.3) 100%);
-            border-radius: 50% 50% 0 0 / 30% 30% 0 0;
-            animation: waveAnimation 30s ease-in-out infinite;
-            will-change: transform;
-        }
-        
-        /* 添加第三个动态渐变圆形 */
-        .bg-circle-3 {
-            position: absolute;
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, rgba(112, 193, 179, 0.4) 0%, rgba(112, 193, 179, 0) 70%);
-            bottom: 100px;
-            left: -100px;
-            border-radius: 50%;
-            animation: floatAnimation3 22s ease-in-out infinite;
-            will-change: transform;
-        }
-        
-        /* ========== 背景动画效果 ========== */
-        @keyframes floatAnimation1 {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-            }
-            25% {
-                transform: translate(30px, 20px) scale(1.05);
-            }
-            50% {
-                transform: translate(-20px, 40px) scale(0.95);
-            }
-            75% {
-                transform: translate(40px, -10px) scale(1.02);
-            }
-        }
-        
-        @keyframes floatAnimation2 {
-            0%, 100% {
-                transform: translate(0, 0) scale(1) rotate(0deg);
-            }
-            33% {
-                transform: translate(-40px, 30px) scale(1.08) rotate(5deg);
-            }
-            66% {
-                transform: translate(20px, -20px) scale(0.92) rotate(-3deg);
-            }
-        }
-        
-        @keyframes floatAnimation3 {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-            }
-            20% {
-                transform: translate(50px, -30px) scale(1.1);
-            }
-            40% {
-                transform: translate(-30px, -50px) scale(0.9);
-            }
-            60% {
-                transform: translate(40px, 20px) scale(1.05);
-            }
-            80% {
-                transform: translate(-20px, 40px) scale(0.95);
-            }
-        }
-        
-        @keyframes waveAnimation {
-            0%, 100% {
-                transform: translateY(0) scaleY(1);
-            }
-            50% {
-                transform: translateY(-20px) scaleY(1.1);
-            }
-        }
-        
-        /* 添加渐变色变化动画 */
-        @keyframes gradientShift {
-            0%, 100% {
-                filter: hue-rotate(0deg);
-            }
-            50% {
-                filter: hue-rotate(10deg);
-            }
-        }
-        
-        .bg-decoration {
-            animation: gradientShift 20s ease-in-out infinite;
-        }
-        
-        /* ========== 主容器 ========== */
         .container {
             max-width: 420px;
             margin: 0 auto;
-            padding: 20px 15px 30px;
+            padding: 20px 15px 50px;
             position: relative;
             z-index: 1;
         }
         
-        /* ========== Logo区域 ========== */
-        .logo-section {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
-        }
+        /* 头部样式 */
+        .logo-section { display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+        .logo-img { width: 100%; max-width: 400px; height: auto; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         
-        .logo {
-            width: 80px;
-            height: auto;
-            margin-right: 10px;
-        }
-        
-        /* ========== 标题区域 ========== */
-        .header {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        
+        .header { text-align: center; margin-bottom: 30px; animation: fadeIn 0.8s ease-out; }
         .main-title {
-            font-size: 42px;
+            font-size: 36px;
             font-weight: bold;
-            background: linear-gradient(135deg, #2E7CD6 0%, #5B9BD5 50%, #70C1B3 100%);
+            background: linear-gradient(135deg, #2E7CD6 0%, #70C1B3 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
             margin-bottom: 8px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-            animation: titleGradient 5s ease infinite;
-            background-size: 200% 200%;
         }
+        .date-info { font-size: 22px; color: #2E7CD6; font-weight: 600; letter-spacing: 1px; }
         
-        @keyframes titleGradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .subtitle {
-            font-size: 18px;
-            color: #5B9BD5;
-            margin-bottom: 5px;
-        }
-        
-        .date-info {
-            font-size: 20px;
-            color: #2E7CD6;
-            font-weight: 500;
-        }
-        
-        /* ========== 新闻板块容器 ========== */
+        /* 卡片样式 */
         .news-section {
             background: white;
             border-radius: 20px;
             margin-bottom: 20px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            animation: fadeIn 0.6s ease-out forwards;
         }
         
-        /* 添加微妙的光晕效果 */
-        .news-section::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #5B9BD5, #70C1B3, #5B9BD5);
-            border-radius: 20px;
-            opacity: 0;
-            z-index: -1;
-            transition: opacity 0.3s ease;
-        }
-        
-        .news-section:hover::before {
-            opacity: 0.15;
-            animation: shimmer 3s ease infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .news-section:active {
-            transform: scale(0.98);
-        }
-        
-        /* ========== 板块标题栏 ========== */
         .section-header {
             background: linear-gradient(90deg, #5B9BD5 0%, #70C1B3 100%);
             padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
-            overflow: hidden;
         }
+        .section-title { font-size: 17px; font-weight: 500; color: white; }
+        .dot-group { display: flex; gap: 4px; }
+        .dot { width: 5px; height: 5px; background: white; border-radius: 50%; opacity: 0.7; }
         
-        /* 添加流动光效 */
-        .section-header::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            animation: slideShine 8s linear infinite;
-        }
-        
-        @keyframes slideShine {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-        
-        .section-title {
-            font-size: 18px;
-            font-weight: 500;
-            color: white;
-        }
-        
-        .section-dots {
-            display: flex;
-            gap: 5px;
-        }
-        
-        .dot {
-            width: 6px;
-            height: 6px;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.8;
-        }
-        
-        /* ========== 新闻列表 ========== */
-        .news-list {
-            padding: 15px 20px;
-        }
-        
+        .news-list { padding: 10px 20px; }
         .news-item {
             display: flex;
             align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #F0F0F0;
-            min-height: 50px; /* 增加触摸区域高度 */
-            transition: background-color 0.2s ease;
+            padding: 14px 0;
+            border-bottom: 1px solid #F2F2F2;
         }
-        
-        .news-item:last-child {
-            border-bottom: none;
-        }
-        
-        .news-item:active {
-            background-color: #F5F5F5;
-            margin: 0 -20px;
-            padding-left: 20px;
-            padding-right: 20px;
-        }
-        
-        /* ========== 新闻编号 ========== */
+        .news-item:last-child { border-bottom: none; }
         .news-number {
-            width: 28px;
-            height: 28px;
+            width: 26px; height: 26px;
             border-radius: 50%;
-            border: 2px solid #5B9BD5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #5B9BD5;
-            font-weight: 500;
-            margin-right: 15px;
-            flex-shrink: 0;
+            border: 1.5px solid #5B9BD5;
+            display: flex; align-items: center; justify-content: center;
+            color: #5B9BD5; font-size: 14px; font-weight: bold;
+            margin-right: 12px; flex-shrink: 0;
         }
-        
-        /* ========== 新闻标题链接 ========== */
-        .news-content {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
         .news-link {
             color: #333;
             text-decoration: none;
             font-size: 15px;
-            line-height: 1.5;
+            line-height: 1.6;
             flex: 1;
-            padding-right: 10px;
-            transition: color 0.2s ease;
         }
-        
-        .news-link:hover {
-            color: #2E7CD6;
-        }
-        
-        .news-link:active {
-            color: #1E5BA8;
-        }
-        
-        /* ========== 链接箭头图标 - SVG渐变箭头 ========== */
-        .link-arrow {
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            transition: transform 0.3s ease;
-        }
-        
-        /* SVG箭头动画 */
-        .link-arrow path {
-            transition: all 0.3s ease;
-        }
-        
-        /* 悬停效果 - 箭头向右移动并变亮 */
-        .news-item:hover .link-arrow {
-            transform: translateX(5px);
-        }
-        
-        .news-item:hover .link-arrow path {
-            stroke-width: 3;
-            filter: brightness(1.2);
-        }
-        
-        /* 点击效果 */
-        .news-item:active .link-arrow {
-            transform: translateX(8px) scale(0.95);
-        }
-        
-        /* ========== 底部二维码区域 ========== */
-        .qr-section {
-            text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-        }
-        
-        .qr-placeholder {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto;
-            background: #F0F0F0;
-            border: 2px solid #DDD;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-            font-size: 12px;
-        }
-        
-        /* ========== 响应式优化 ========== */
-        @media (max-width: 375px) {
-            .main-title {
-                font-size: 36px;
-            }
-            
-            .subtitle {
-                font-size: 16px;
-            }
-            
-            .news-link {
-                font-size: 14px;
-            }
-        }
-        
-        /* ========== 加载动画 ========== */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px) scale(0.95);
-                filter: blur(5px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-                filter: blur(0);
-            }
-        }
-        
-        @keyframes slideInFromLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-        
-        .header {
-            animation: fadeIn 0.8s ease-out forwards;
-        }
-        
-        .news-section {
-            opacity: 0;
-            animation: fadeIn 0.6s ease-out forwards;
-        }
-        
-        .news-section:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-        
-        .news-section:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-        
-        .news-section:nth-child(4) {
-            animation-delay: 0.6s;
-        }
-        
-        /* 新闻条目的渐进动画 - 新增第4条的延迟 */
-        .news-item {
-            opacity: 0;
-            animation: slideInFromLeft 0.5s ease-out forwards;
-        }
-        
-        .news-item:nth-child(1) { animation-delay: 0.1s; }
-        .news-item:nth-child(2) { animation-delay: 0.2s; }
-        .news-item:nth-child(3) { animation-delay: 0.3s; }
-        .news-item:nth-child(4) { animation-delay: 0.4s; } /* 新增第4条动画延迟 */
+        .link-arrow { width: 20px; height: 20px; opacity: 0.5; margin-left: 8px; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
-    <!-- 背景装饰元素 -->
     <div class="bg-decoration">
         <div class="bg-circle-1"></div>
         <div class="bg-circle-2"></div>
-        <div class="bg-circle-3"></div>
-        <div class="bg-wave"></div>
     </div>
     
-    <!-- 主容器 -->
     <div class="container">
-        <!-- Logo区域 -->
         <div class="logo-section">
-            <img src="集团logo.jpg" alt="正大集团" class="logo" onerror="this.style.display='none'">
+            <img src="logo.png" alt="正大新能源" class="logo-img" onerror="this.style.display='none'">
         </div>
         
-        <!-- 标题区域 - 主标题修改：光伏早报 → 能源日报 -->
         <div class="header">
-            <h1 class="main-title">能源日报</h1>
-            <p class="subtitle">30秒速读前沿新闻</p>
-            <p class="date-info">09/03 <span style="font-size: 14px; color: #999;">2023</span></p>
+            <h1 class="main-title">正大新能源月报</h1>
+            <p class="date-info">2026/1</p>
         </div>
         
-        <!-- 宏观政策板块 - 新增第4条新闻 -->
         <div class="news-section">
             <div class="section-header">
                 <h2 class="section-title">宏观政策</h2>
-                <div class="section-dots">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                </div>
+                <div class="dot-group"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
             </div>
             <div class="news-list">
-                <!-- 新闻1 - 可编辑超链接 -->
                 <div class="news-item">
                     <span class="news-number">1</span>
-                    <div class="news-content">
-                        <a href="https://news.solarbe.com/202509/08/50007980.html#" class="news-link" id="policy-news-1">
-                            两部门：加快在电力市场、场站智慧运营、新能源规划等方向的人工智能应用
-                        </a>
-                        <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="arrowGradient5" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
+                    <a href="https://mp.weixin.qq.com/s/HAHc8xEP_5NdgMzFNp8nEg" class="news-link">2026：光伏“红区”求生指南及机遇</a>
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B9BD5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18l6-6-6-6'/%3E%3C/svg%3E" class="link-arrow">
                 </div>
-                
-                <!-- 新闻2 - 可编辑超链接 -->
                 <div class="news-item">
                     <span class="news-number">2</span>
-                    <div class="news-content">
-                        <a href="https://news.solarbe.com/202509/08/50007935.html" class="news-link" id="policy-news-2">
-                            北京136号文征求意见：存量全部纳入机制，0.3598元/度；增量执行≤12年
-                        </a>
-                        <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="arrowGradient5-2" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient5-2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
+                    <a href="https://mp.weixin.qq.com/s/E6dyo9nt_bs42nVMd8habQ" class="news-link">电力交易变革：11省市取消固定分时电价</a>
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B9BD5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18l6-6-6-6'/%3E%3C/svg%3E" class="link-arrow">
                 </div>
-                
-                <!-- 新闻3 - 可编辑超链接 -->
                 <div class="news-item">
                     <span class="news-number">3</span>
-                    <div class="news-content">
-                        <a href="https://news.solarbe.com/202509/04/50007801.html" class="news-link" id="policy-news-3">
-                            21省“136号文”落地，下半年光伏该投哪里？
-                        </a>
-                        <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="arrowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                </div>
-                
-                <!-- 新闻4 - 新增第4条新闻 -->
-                <div class="news-item">
-                    <span class="news-number">4</span>
-                    <div class="news-content">
-                        <a href="https://news.solarbe.com/202509/07/50007910.html" class="news-link" id="policy-news-4">
-                            发改委：2025年非化石能源消费比重目标提升至20%以上
-                        </a>
-                        <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="arrowGradient5-4" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient5-4)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
+                    <a href="https://mp.weixin.qq.com/s/HtK0_EYHJ-w_l38-Op1LAw" class="news-link">配储或成并网型绿电直连项目“标配”，11 省份已发文明确</a>
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B9BD5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18l6-6-6-6'/%3E%3C/svg%3E" class="link-arrow">
                 </div>
             </div>
         </div>
         
-        <!-- 产经动态板块 - 新增第4条新闻 -->
         <div class="news-section">
             <div class="section-header">
                 <h2 class="section-title">产经动态</h2>
-                <div class="section-dots">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                </div>
+                <div class="dot-group"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
             </div>
             <div class="news-list">
-                <!-- 新闻1 - 可编辑超链接 -->
                 <div class="news-item">
                     <span class="news-number">1</span>
-                    <div class="news-content">
-                        <a href="https://news.solarbe.com/202509/08/50007960.html" class="news-link" id="industry-news-1">
-                            罗博特科宣布赴港上市！
-                        </a>
-                        <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="arrowGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
+                    <a href="https://mp.weixin.qq.com/s/T5UG2PxzsVCuqG-lf9HJTw" class="news-link">售电市场“天塌了”！“价差暴利”时代终结，9省已出“限价令”</a>
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B9BD5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18l6-6-6-6'/%3E%3C/svg%3E" class="link-arrow">
                 </div>
-                
-                <!-- 新闻2 - 可编辑超链接 -->
                 <div class="news-item">
                     <span class="news-number">2</span>
-                    <div class="news-content">
-                        <a href="https://news.solarbe.com/202509/07/50007931.html" class="news-link" id="industry-news-2">
-                            吉电股份收到国家可再生能源补贴资金9.13亿元，1-8月累计达12.71亿元
-                        </a>
-                        <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="arrowGradient5-5" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient5-5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
+                    <a href="https://api3.cls.cn/share/article/2258945" class="news-link">国家电网“十五五”计划投资 4 万亿元建设新型电力系统</a>
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B9BD5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18l6-6-6-6'/%3E%3C/svg%3E" class="link-arrow">
                 </div>
-                
-                <!-- 新闻3 - 可编辑超链接 -->
                 <div class="news-item">
                     <span class="news-number">3</span>
-                    <div class="news-content">
-                        <a href="https://news.solarbe.com/202509/05/50007815.html" class="news-link" id="industry-news-3">
-                            中国电建 vs 中国能建：2025上半年新能源装机、营收对比
-                        </a>
-                        <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="arrowGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient3)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
+                    <a href="https://mp.weixin.qq.com/s/DWYwR3WwzMmyHj7PMtEucw" class="news-link">2026：变压器需求爆发</a>
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B9BD5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18l6-6-6-6'/%3E%3C/svg%3E" class="link-arrow">
                 </div>
-                
-                <!-- 新闻4 - 新增第4条新闻 -->
                 <div class="news-item">
                     <span class="news-number">4</span>
-                    <div class="news-content">
-                        <a href="https://news.solarbe.com/202509/06/50007850.html" class="news-link" id="industry-news-4">
-                            隆基绿能与沙特签署15GW光伏电站合作协议，总投资超200亿元
-                        </a>
-                        <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="arrowGradient5-6" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient5-6)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
+                    <a href="https://mp.weixin.qq.com/s/RYapz060Ry1uYdIH1Ucgvg" class="news-link">智能微电网成为国家电网核心词</a>
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B9BD5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18l6-6-6-6'/%3E%3C/svg%3E" class="link-arrow">
                 </div>
             </div>
         </div>
         
-        <!-- 科技创新板块 - 新增第4条新闻 -->
         <div class="news-section">
             <div class="section-header">
-                <h2 class="section-title">科技创新</h2>
-                <div class="section-dots">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                </div>
+                <h2 class="section-title">产技创新</h2>
+                <div class="dot-group"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
             </div>
             <div class="news-list">
-                <!-- 新闻1 - 可编辑超链接 -->
                 <div class="news-item">
                     <span class="news-number">1</span>
-                    <div class="news-content">
-                        <a href="https://news.solarbe.com/202509/08/50008017.html" class="news-link" id="tech-news-1">
-                            钙钛矿叠层太阳能电池通过纹理硅钝化实现33.1%的效率
-                        </a>
-                        <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="arrowGradient4" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient4)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
+                    <a href="https://mp.weixin.qq.com/s/7U9m4fAfHXCDwoeEj5WvWg" class="news-link">人形机器人正式“上岗”风电工厂</a>
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B9BD5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18l6-6-6-6'/%3E%3C/svg%3E" class="link-arrow">
                 </div>
-                
-                <!-- 新闻2 - 可编辑超链接 -->
                 <div class="news-item">
                     <span class="news-number">2</span>
-                    <div class="news-content">
-                        <a href="https://news.solarbe.com/202509/07/50007920.html" class="news-link" id="tech-news-2">
-                            全球首条全自动化TOPCon电池生产线投产，产能提升30%
-                        </a>
-                        <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="arrowGradient5-7" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient5-7)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
+                    <a href="https://mp.weixin.qq.com/s/DWYwR3WwzMmyHj7PMtEucw" class="news-link">世界经济论坛聚焦聚变能源与AI</a>
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B9BD5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18l6-6-6-6'/%3E%3C/svg%3E" class="link-arrow">
                 </div>
-                
-                <!-- 新闻3 - 可编辑超链接 -->
-                <div class="news-item">
-                    <span class="news-number">3</span>
-                    <div class="news-content">
-                        <a href="https://news.solarbe.com/202509/05/50007830.html" class="news-link" id="tech-news-3">
-                            新型储能电池寿命突破15年，成本降低25%
-                        </a>
-                        <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="arrowGradient5-8" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient5-8)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                </div>
-                
-                <!-- 新闻4 - 新增第4条新闻 -->
-                <div class="news-item">
-                    <span class="news-number">4</span>
-                    <div class="news-content">
-                        <a href="https://news.solarbe.com/202509/04/50007790.html" class="news-link" id="tech-news-4">
-                            华为发布智能光伏逆变器，转换效率达99.2%
-                        </a>
-                        <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="arrowGradient5-9" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#5B9BD5;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#70C1B3;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M9 6L15 12L9 18" stroke="url(#arrowGradient5-9)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- 底部二维码区域（可选） -->
-        <div class="qr-section">
-            <div class="qr-placeholder">
-                二维码区域
             </div>
         </div>
     </div>
-    
-    <script>
-        // ========== 新闻数据管理 - 每个板块新增news4数据 ==========
-        const newsData = {
-            // 宏观政策板块 - 新增news4
-            policy: {
-                news1: {
-                    title: "两部门：加快在电力市场、场站智慧运营、新能源规划等方向的人工智能应用",
-                    link: "https://news.solarbe.com/202509/08/50007980.html"
-                },
-                news2: {
-                    title: "北京136号文征求意见：存量全部纳入机制，0.3598元/度；增量执行≤12年",
-                    link: "https://news.solarbe.com/202509/08/50007935.html"
-                },
-                news3: {
-                    title: "21省“136号文”落地，下半年光伏该投哪里？",
-                    link: "https://news.solarbe.com/202509/04/50007801.html"
-                },
-                news4: { // 新增第4条数据
-                    title: "发改委：2025年非化石能源消费比重目标提升至20%以上",
-                    link: "https://news.solarbe.com/202509/07/50007910.html"
-                }
-            },
-            // 产经动态板块 - 新增news4
-            industry: {
-                news1: {
-                    title: "罗博特科宣布赴港上市！",
-                    link: "https://news.solarbe.com/202509/08/50007960.html"
-                },
-                news2: {
-                    title: "吉电股份收到国家可再生能源补贴资金9.13亿元，1-8月累计达12.71亿元",
-                    link: "https://news.solarbe.com/202509/07/50007931.html"
-                },
-                news3: {
-                    title: "中国电建 vs 中国能建：2025上半年新能源装机、营收对比",
-                    link: "https://news.solarbe.com/202509/05/50007815.html"
-                },
-                news4: { // 新增第4条数据
-                    title: "隆基绿能",
-                    link: "https://news.solarbe.com/202509/06/50007850.html"
-                }
-            },
-            // 科技创新板块 - 新增news4
-            tech: {
-                news1: {
-                    title: "钙钛矿叠层太阳能电池通过纹理硅钝化实现33.1%的效率",
-                    link: "https://news.solarbe.com/202509/08/50008017.html"
-                },
-                news2: { // 替换原"光"为实际内容
-                    title: "全球首条全自动化TOPCon电池生产线投产",
-                    link: "https://news.solarbe.com/202509/07/50007920.html"
-                },
-                news3: { // 替换原"全"为实际内容
-                    title: "新型储能电池寿命%",
-                    link: "https://news.solarbe.com/202509/05/50007830.html"
-                },
-                news4: { // 新增第4条数据
-                    title: "智能光伏逆变器",
-                    link: "https://news.solarbe.com/202509/04/50007790.html"
-                }
-            }
-        };
-        
-        // ========== 初始化新闻内容 - 新增第4条新闻的DOM操作 ==========
-        function initNews() {
-            // 更新宏观政策板块（新增news4）
-            document.getElementById('policy-news-1').textContent = newsData.policy.news1.title;
-            document.getElementById('policy-news-1').href = newsData.policy.news1.link;
-            document.getElementById('policy-news-2').textContent = newsData.policy.news2.title;
-            document.getElementById('policy-news-2').href = newsData.policy.news2.link;
-            document.getElementById('policy-news-3').textContent = newsData.policy.news3.title;
-            document.getElementById('policy-news-3').href = newsData.policy.news3.link;
-            document.getElementById('policy-news-4').textContent = newsData.policy.news4.title; // 新增第4条
-            document.getElementById('policy-news-4').href = newsData.policy.news4.link; // 新增第4条
-            
-            // 更新产经动态板块（新增news4）
-            document.getElementById('industry-news-1').textContent = newsData.industry.news1.title;
-            document.getElementById('industry-news-1').href = newsData.industry.news1.link;
-            document.getElementById('industry-news-2').textContent = newsData.industry.news2.title;
-            document.getElementById('industry-news-2').href = newsData.industry.news2.link;
-            document.getElementById('industry-news-3').textContent = newsData.industry.news3.title;
-            document.getElementById('industry-news-3').href = newsData.industry.news3.link;
-            document.getElementById('industry-news-4').textContent = newsData.industry.news4.title; // 新增第4条
-            document.getElementById('industry-news-4').href = newsData.industry.news4.link; // 新增第4条
-            
-            // 更新科技创新板块（新增news4，替换原空内容）
-            document.getElementById('tech-news-1').textContent = newsData.tech.news1.title;
-            document.getElementById('tech-news-1').href = newsData.tech.news1.link;
-            document.getElementById('tech-news-2').textContent = newsData.tech.news2.title;
-            document.getElementById('tech-news-2').href = newsData.tech.news2.link;
-            document.getElementById('tech-news-3').textContent = newsData.tech.news3.title;
-            document.getElementById('tech-news-3').href = newsData.tech.news3.link;
-            document.getElementById('tech-news-4').textContent = newsData.tech.news4.title; // 新增第4条
-            document.getElementById('tech-news-4').href = newsData.tech.news4.link; // 新增第4条
-        }
-        
-        // ========== 更新日期显示 ==========
-        function updateDate() {
-            const now = new Date();
-            const month = String(now.getMonth() + 1).padStart(2, '0');
-            const day = String(now.getDate()).padStart(2, '0');
-            const year = now.getFullYear();
-            
-            // 更新日期显示
-            const dateElement = document.querySelector('.date-info');
-            if (dateElement) {
-                dateElement.innerHTML = `${month}/${day} <span style="font-size: 14px; color: #999;">${year}</span>`;
-            }
-        }
-        
-        // ========== 添加点击统计（可选） ==========
-        function trackClick(category, newsId) {
-            console.log(`用户点击了 ${category} 板块的新闻 ${newsId}`);
-            // 这里可以添加统计代码，如 Google Analytics
-        }
-        
-        // ========== 绑定点击事件 ==========
-        document.querySelectorAll('.news-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                const id = this.id;
-                const category = id.split('-')[0];
-                const newsNumber = id.split('-')[2];
-                trackClick(category, newsNumber);
-                
-                // 如果链接是 #，则阻止默认行为
-                if (this.href.endsWith('#')) {
-                    e.preventDefault();
-                    alert('请先配置新闻链接地址');
-                }
-            });
-        });
-        
-        // ========== 页面加载完成后初始化 ==========
-        document.addEventListener('DOMContentLoaded', function() {
-            initNews();
-            updateDate();
-            initParallaxEffect();
-        });
-        
-        // ========== 添加视差滚动效果 ==========
-        function initParallaxEffect() {
-            const bgCircles = document.querySelectorAll('.bg-circle-1, .bg-circle-2, .bg-circle-3');
-            const bgWave = document.querySelector('.bg-wave');
-            
-            let ticking = false;
-            function updateParallax() {
-                const scrolled = window.pageYOffset;
-                
-                bgCircles.forEach((circle, index) => {
-                    const speed = 0.5 + (index * 0.1);
-                    const yPos = -(scrolled * speed);
-                    circle.style.transform = `translateY(${yPos}px)`;
-                });
-                
-                if (bgWave) {
-                    bgWave.style.transform = `translateY(${scrolled * 0.3}px)`;
-                }
-                
-                ticking = false;
-            }
-            
-            function requestTick() {
-                if (!ticking) {
-                    window.requestAnimationFrame(updateParallax);
-                    ticking = true;
-                }
-            }
-            
-            window.addEventListener('scroll', requestTick);
-        }
-        
-        // ========== 便捷更新函数（供手动调用） - 兼容第4条新闻 ==========
-        // 使用示例：updateNews('policy', 4, '新的新闻标题', 'https://example.com')
-        function updateNews(category, number, title, link) {
-            const elementId = `${category}-news-${number}`;
-            const element = document.getElementById(elementId);
-            if (element) {
-                element.textContent = title;
-                element.href = link;
-                console.log(`已更新：${category} 板块的第 ${number} 条新闻`);
-            } else {
-                console.error(`找不到元素：${elementId}`);
-            }
-        }
-        
-        // ========== 批量更新函数 - 兼容第4条新闻 ==========
-        // 使用示例：batchUpdate('policy', [{title: '新闻1', link: 'url1'}, ..., {title: '新闻4', link: 'url4'}])
-        function batchUpdate(category, newsArray) {
-            newsArray.forEach((news, index) => {
-                if (news.title && news.link) {
-                    updateNews(category, index + 1, news.title, news.link);
-                }
-            });
-        }
-    </script>
 </body>
 </html>
